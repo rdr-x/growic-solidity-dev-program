@@ -22,6 +22,28 @@ contract StructsTaskContract {
     event FundsDeposited(address _user, uint256 _amount);
     event ProfileUpdated(address _user);
 
+    //custom errors
+    error AmountToSmall(); 
+    //modifiers
+
+    modifier userDeposited() {
+        require(user[msg.sender].amount > 0, "You need to deposit first!");
+        _;
+    }
+
+    modifier available(uint256 _amount) {
+        if (_amount < Fee) {
+            revert AmountToSmall();
+        }
+        _;
+    }
+
+        
+    modifier onlyOwner() {
+        require(msg.sender == owner, 'Just the owner of the contract is allowed to withdraw!');
+        _;
+    }
+
     //functions
     function deposit(uint256 _amount) public {
         user[msg.sender].amount += _amount;
@@ -41,28 +63,9 @@ contract StructsTaskContract {
     function getUserDetail() public view returns(User memory) {
         return user[msg.sender];
     }
-    
-    modifier onlyOwner() {
-        require(msg.sender == owner, 'Just the owner of the contract is allowed to withdraw!');
-        _;
-    }
 
     function withdraw(uint256 _amount) public onlyOwner {
         user[msg.sender].amount += _amount;
-    }
-
-    modifier userDeposited() {
-        require(user[msg.sender].amount > 0, "You need to deposit first!");
-        _;
-    }
-
-    error AmountToSmall(); 
-
-    modifier available(uint256 _amount) {
-        if (_amount < Fee) {
-            revert AmountToSmall();
-        }
-        _;
     }
 
     function addFund(uint256 _amount) public userDeposited available(_amount) {
