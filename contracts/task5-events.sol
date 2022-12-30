@@ -70,6 +70,8 @@ contract StructsTaskContract {
 
     function addFund(uint256 _amount) public userDeposited available(_amount) {
         user[msg.sender].amount += _amount;
+        emit FundsDeposited(msg.sender, _amount);
+
     }
 
 }
