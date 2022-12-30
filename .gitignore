@@ -7,6 +7,7 @@ typechain-types
 
 .env
 
+yarn-error.log
 # Hardhat files
 cache
 artifacts

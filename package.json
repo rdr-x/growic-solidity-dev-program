@@ -6,6 +6,8 @@
   "author": "Rodrigo Ramos Xochiteotzin <rodrx20@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@openzeppelin/contracts": "^4.8.0",
+    "@openzeppelin/contracts-upgradeable": "^4.8.0",
     "dotenv": "^16.0.3",
     "hardhat": "^2.12.4"
   },
