@@ -1,7 +1,7 @@
 pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
-contract StructsTaskContract {
+contract ModifiersTaskContract {
 
     address public owner;
     uint256 private constant Fee = 3;
