@@ -1,13 +1,13 @@
 pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
-contract EventsTaskContract {
+contract PayableTaskContract {
     //variables and constants
-    address public owner;
+    address payable public owner;
     uint256 private constant Fee = 3;
     //constructor called just when the contract is created/deployed
     constructor () {
-        owner = msg.sender;
+        owner = payable(msg.sender);
     }
     //struct data types
     struct User {
@@ -45,9 +45,9 @@ contract EventsTaskContract {
     }
 
     //functions
-    function deposit(uint256 _amount) public {
-        user[msg.sender].amount += _amount;
-        emit FundsDeposited(msg.sender, _amount);
+    function deposit() public payable {
+        user[msg.sender].amount += msg.value;
+        emit FundsDeposited(msg.sender, msg.value);
     }
 
     function checkBalance() public view returns(uint256) {
@@ -64,13 +64,13 @@ contract EventsTaskContract {
         return user[msg.sender];
     }
 
-    function withdraw(uint256 _amount) public onlyOwner {
-        user[msg.sender].amount -= _amount;
+    function withdraw() public payable onlyOwner {
+        user[msg.sender].amount -= msg.value;
     }
 
-    function addFund(uint256 _amount) public userDeposited available(_amount) {
-        user[msg.sender].amount += _amount;
-        emit FundsDeposited(msg.sender, _amount);
+    function addFund() public payable userDeposited available(msg.value) {
+        user[msg.sender].amount += msg.value;
+        emit FundsDeposited(msg.sender, msg.value);
 
     }
 

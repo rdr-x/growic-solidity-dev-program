@@ -41,7 +41,7 @@ contract ModifiersTaskContract {
     }
 
     function withdraw(uint256 _amount) public onlyOwner {
-        user[msg.sender].amount += _amount;
+        user[msg.sender].amount -= _amount;
     }
 
     modifier userDeposited() {
