@@ -16,6 +16,6 @@ contract ConstructorTaskContractB is ConstructorTaskContractA {
     address owner;
 
     constructor () ConstructorTaskContractA(20) {
-        
+        owner = msg.sender;
     }
 }
